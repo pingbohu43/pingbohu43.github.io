@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pingbo Hu | Statistics — Academic Job Market</title>
+  <meta name="description" content="Pingbo Hu — Statistics | Causal inference, robust classification with label noise, survival analysis. Academic job market profile, publications, research, teaching, CV." />
+  <link rel="canonical" href="https://pingbohu.com/" />
+  <meta property="og:title" content="Pingbo Hu — Statistics" />
+  <meta property="og:description" content="Causal inference • Robust classification • Survival analysis" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pingbohu.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0b1020; --fg:#e9ecf1; --muted:#a5afc0; --card:#121937cc; --line:#222a45; --brand1:#7c9eff; --brand2:#7af1d2; --accent:#ffd166;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;}
+    a{color:var(--brand2);text-decoration:none}
+    a:hover{opacity:.9}
+    .container{max-width:1080px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(180deg,rgba(11,16,32,.9),rgba(11,16,32,.6));z-index:10;border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+    .chip{padding:.35rem .7rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.85rem}
+    .nav a.link{color:var(--muted);font-weight:600}
+    .nav a.link:hover{color:var(--fg)}
+    .nav .links{display:flex;gap:18px;flex-wrap:wrap}
+
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;padding:56px 0}
+    .card{background:linear-gradient(180deg,rgba(18,25,55,.7),rgba(18,25,55,.4));border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+    .hero .profile{padding:28px}
+    .avatar{width:108px;height:108px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(135deg,#1b2858,#203264);display:block}
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 16px}
+    h1{font-size:2.2rem;margin:8px 0 12px;line-height:1.15}
+    .grad{background:linear-gradient(135deg,var(--brand1),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    p.lead{color:var(--muted);font-size:1.05rem}
+
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:.75rem 1rem;border-radius:12px;border:1px solid var(--line);background:#151c37;color:var(--fg);font-weight:700}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand1),var(--brand2));color:#0c1125}
+
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+    .stat{padding:14px;border:1px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted)}
+    .stat b{display:block;color:var(--fg);font-size:1.4rem;margin-bottom:2px}
+
+    .panel{padding:22px}
+    section{padding:10px 0 28px}
+    section h2{margin:0 0 10px;font-size:1.5rem}
+    .section-sub{color:var(--muted);margin:0 0 14px}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .grid.two{grid-template-columns:repeat(2,1fr)}
+    .grid.one{grid-template-columns:1fr}
+
+    .project{padding:16px;border:1px solid var(--line);border-radius:14px}
+    .project h3{margin:2px 0 6px;font-size:1.05rem}
+    .project p{margin:0;color:var(--muted)}
+
+    .pub{padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
+    .pub .title{font-weight:700}
+    .pub .meta{color:var(--muted);font-size:.95rem;margin:6px 0}
+    .pub .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+    .tag{font-size:.8rem;background:#18204a;border:1px solid var(--line);padding:.25rem .55rem;border-radius:999px;color:var(--muted)}
+    .pub .actions{display:flex;gap:10px;margin-top:8px}
+
+    details{background:#0f1636;border:1px dashed var(--line);border-radius:12px;padding:10px;margin-top:8px}
+    details summary{cursor:pointer;color:var(--muted);font-weight:600}
+
+    .flex{display:flex;gap:12px;align-items:center}
+    .right{justify-content:flex-end}
+
+    .timeline{position:relative;padding-left:22px}
+    .timeline::before{content:"";position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(var(--brand2),transparent)}
+    .t-item{position:relative;margin:14px 0;padding-left:6px}
+    .t-item::before{content:"";position:absolute;left:-6px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--brand1);box-shadow:0 0 0 3px #0b1020}
+    .t-title{font-weight:700}
+    .t-sub{color:var(--muted)}
+
+    footer{padding:32px 0;color:var(--muted);border-top:1px solid var(--line);text-align:center}
+
+    .switch{margin-left:8px;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 10px;color:var(--muted)}
+    .light{--bg:#f8fafc;--fg:#0c1322;--muted:#475569;--card:#ffffffcc;--line:#e2e8f0;--brand1:#335cff;--brand2:#22d3ee;--accent:#ca8a04}
+
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid,.grid.two{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(3,1fr)}
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Pingbo Hu",
+    "jobTitle":"Statistician",
+    "url":"https://pingbohu.com",
+    "sameAs":["https://scholar.google.com/","https://github.com/"],
+    "knowsAbout":["Causal inference","Robust classification","Survival analysis"],
+    "alumniOf":"Western University"
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Pingbo Hu <span class="chip">Statistics</span></div>
+      <nav class="links">
+        <a class="link" href="#about">About</a>
+        <a class="link" href="#research">Research</a>
+        <a class="link" href="#pubs">Publications</a>
+        <a class="link" href="#teaching">Teaching</a>
+        <a class="link" href="#service">Service</a>
+        <a class="link" href="#contact">Contact</a>
+        <button id="mode" class="switch" aria-label="切换明/暗色">☾/☀︎</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card profile">
+        <div class="badges"><span class="chip">Academic Job Market 2025–26</span><span class="chip">Causal Inference</span><span class="chip">Label Noise</span><span class="chip">Survival</span></div>
+        <h1>Hi, I’m <span class="grad">Pingbo Hu</span> — Statistician & Postdoc</h1>
+        <p class="lead">I develop methods for <b>causal inference</b>, <b>robust classification under label noise</b>, and <b>survival analysis</b>. I’m seeking a <b>tenure‑track position</b> in Statistics/Biostatistics.</p>
+        <div class="cta">
+          <a class="btn primary" href="/cv/PingboHu_CV.pdf" target="_blank" rel="noopener">📄 Download CV</a>
+          <a class="btn" href="mailto:pingbohu@pingbohu.com">✉️ Email</a>
+          <a class="btn" href="https://scholar.google.com/" target="_blank" rel="noopener">🔎 Google Scholar</a>
+          <a class="btn" href="https://github.com/" target="_blank" rel="noopener">🐙 GitHub</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>3+</b>Journals (JASA, SIM, CJS)</div>
+          <div class="stat"><b>4</b>Active Projects</div>
+          <div class="stat"><b>1000+</b>Lines of Repro Code</div>
+        </div>
+      </div>
+      <div class="card panel">
+        <h2 id="about">About</h2>
+        <p class="section-sub">Brief profile</p>
+        <p>Ph.D. in Statistics, Western University; one‑year Postdoc at Western. Research areas include separable treatment effects for bivariate responses, kernel‑smoothed estimators with measurement error, and label‑noise‑robust classification. I enjoy building <b>reproducible pipelines</b> in R/Python and collaborating with biomedical teams.</p>
+        <div class="timeline">
+          <div class="t-item"><div class="t-title">2024–2025 · Postdoctoral Fellow</div><div class="t-sub">Western University</div></div>
+          <div class="t-item"><div class="t-title">2020–2024 · Ph.D. in Statistics</div><div class="t-sub">Western University (Advisor: Prof. Grace Yi)</div></div>
+          <div class="t-item"><div class="t-title">2017–2020 · M.Sc. / B.Sc. (Stats)</div><div class="t-sub">—</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH HIGHLIGHTS -->
+    <section id="research">
+      <div class="flex right"><a class="chip" href="#contact">Open to interviews →</a></div>
+      <h2>Research Highlights</h2>
+      <p class="section-sub">Click a card to read a 2‑line summary</p>
+      <div class="grid">
+        <article class="project">
+          <h3>Separable Treatment Effects for Bivariate Responses</h3>
+          <p>Likelihood‑based estimation and hypothesis testing; discrete‑time ratio‑GOR design; extensions to continuous time.</p>
+        </article>
+        <article class="project">
+          <h3>Robust Classification under Label Noise</h3>
+          <p>Classification‑calibrated losses with noise‑robustness; provable risk bounds; practical algorithms with strong performance.</p>
+        </article>
+        <article class="project">
+          <h3>Survival with Repeated Measures & Frailty</h3>
+          <p>Kernel‑smoothed ratio estimators; bias correction under measurement error; asymptotics and efficient computation.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="pubs">
+      <h2>Selected Publications</h2>
+      <p class="section-sub">* Authors with † indicate equal contribution. Add/replace items in HTML as needed.</p>
+
+      <div class="pub">
+        <div class="title">Mitigating Input Noise in Binary Classification with Data Augmentation</div>
+        <div class="meta"><i>Canadian Journal of Statistics</i>, 2025 (with G. Yi)</div>
+        <div class="tags"><span class="tag">label noise</span><span class="tag">robust ML</span><span class="tag">theory</span></div>
+        <div class="actions">
+          <a class="btn" href="#">PDF</a>
+          <a class="btn" href="#">Code</a>
+          <a class="btn" href="#">Talk</a>
+        </div>
+        <details><summary>BibTeX</summary><pre>@article{HuYi2025,
+  title={Mitigating Input Noise in Binary Classification with Data Augmentation},
+  author={Hu, Pingbo and Yi, Grace},
+  journal={Canadian Journal of Statistics},
+  year={2025}
+}</pre></details>
+      </div>
+
+      <div class="pub">
+        <div class="title">Separable Treatment Effects for Bivariate Responses</div>
+        <div class="meta">preprint, 2025</div>
+        <div class="tags"><span class="tag">causal</span><span class="tag">bivariate</span><span class="tag">likelihood</span></div>
+        <div class="actions"><a class="btn" href="#">Preprint</a><a class="btn" href="#">Slides</a></div>
+        <details><summary>BibTeX</summary><pre>@article{Hu2025STE,
+  title={Separable Treatment Effects for Bivariate Responses},
+  author={Hu, Pingbo},
+  note={arXiv:xxxxx}
+}</pre></details>
+      </div>
+
+      <div class="pub">
+        <div class="title">Kernel‑Smoothed Estimation under Measurement Error</div>
+        <div class="meta">in prep., 2025</div>
+        <div class="tags"><span class="tag">kernel smoothing</span><span class="tag">frailty</span></div>
+        <div class="actions"><a class="btn" href="#">Draft</a></div>
+      </div>
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <div class="grid two">
+        <div class="project">
+          <h3>Intro to Probability & Statistics</h3>
+          <p>TA/Instructor support; designed labs on CLT, bootstrap, logistic regression.</p>
+        </div>
+        <div class="project">
+          <h3>Statistical Learning</h3>
+          <p>Practical modules on loss functions, cross‑validation, and calibration.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICE & AWARDS -->
+    <section id="service">
+      <h2>Service & Awards</h2>
+      <div class="grid two">
+        <div class="project"><h3>Reviewer</h3><p><span class="tag">SIM</span> <span class="tag">CJS</span></p></div>
+        <div class="project"><h3>Awards</h3><p>Best Student Paper, Travel Grants, TA Excellence (examples)</p></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card panel">
+        <p>Preferred: <a href="mailto:pingbohu@pingbohu.com">pingbohu@pingbohu.com</a></p>
+        <p>Social: <a href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a> · <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> · <a href="#" target="_blank" rel="noopener">ORCID</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Pingbo Hu · Built with plain HTML/CSS · Deployed on GitHub Pages
+  </footer>
+
+  <script>
+    // Dark/Light mode toggle with localStorage
+    const root = document.documentElement; const btn = document.getElementById('mode');
+    const saved = localStorage.getItem('color-mode');
+    if(saved==='light') root.classList.add('light');
+    btn.addEventListener('click',()=>{root.classList.toggle('light');localStorage.setItem('color-mode',root.classList.contains('light')?'light':'dark')});
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <!-- Optional Analytics (replace with your own) -->
+  <!-- <script defer data-domain="pingbohu.com" src="https://plausible.io/js/script.js"></script> -->
+</body>
+</html>
