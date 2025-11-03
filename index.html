@@ -36,7 +36,7 @@
     .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;padding:56px 0}
     .card{background:linear-gradient(180deg,rgba(18,25,55,.7),rgba(18,25,55,.4));border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
     .hero .profile{padding:28px}
-    .avatar{width:108px;height:108px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(135deg,#1b2858,#203264);display:block}
+    .avatar{width:128px;height:128px;border-radius:18px;border:1px solid var(--line);object-fit:cover;display:block;margin-bottom:12px}
     .badges{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 16px}
     h1{font-size:2.2rem;margin:8px 0 12px;line-height:1.15}
     .grad{background:linear-gradient(135deg,var(--brand1),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -84,6 +84,13 @@
     .t-title{font-weight:700}
     .t-sub{color:var(--muted)}
 
+    /* News ticker */
+    .ticker{overflow:hidden;max-height:180px;position:relative;border:1px solid var(--line);border-radius:14px}
+    .ticker__list{list-style:none;margin:0;padding:12px;display:flex;flex-direction:column;gap:10px;position:absolute;width:100%;animation:verticalScroll 20s linear infinite}
+    .ticker__list li{color:var(--muted);} 
+    .ticker:hover .ticker__list{animation-play-state:paused}
+    @keyframes verticalScroll{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+
     footer{padding:32px 0;color:var(--muted);border-top:1px solid var(--line);text-align:center}
 
     .switch{margin-left:8px;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 10px;color:var(--muted)}
@@ -114,7 +121,7 @@
       <div class="brand">Pingbo Hu <span class="chip">Statistics</span></div>
       <nav class="links">
         <a class="link" href="#about">About</a>
-        <a class="link" href="#research">Research</a>
+        <a class="link" href="#news">News</a>
         <a class="link" href="#pubs">Publications</a>
         <a class="link" href="#teaching">Teaching</a>
         <a class="link" href="#service">Service</a>
@@ -128,6 +135,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="card profile">
+        <img class="avatar" src="/assets/img/profile.jpg" alt="Pingbo Hu portrait" />
         <div class="badges"><span class="chip">Academic Job Market 2025–26</span><span class="chip">Causal Inference</span><span class="chip">Label Noise</span><span class="chip">Survival</span></div>
         <h1>Hi, I’m <span class="grad">Pingbo Hu</span> — Statistician & Postdoc</h1>
         <p class="lead">I develop methods for <b>causal inference</b>, <b>robust classification under label noise</b>, and <b>survival analysis</b>. I’m seeking a <b>tenure‑track position</b> in Statistics/Biostatistics.</p>
@@ -155,24 +163,19 @@
       </div>
     </section>
 
-    <!-- RESEARCH HIGHLIGHTS -->
-    <section id="research">
+    <!-- NEWS -->
+    <section id="news">
       <div class="flex right"><a class="chip" href="#contact">Open to interviews →</a></div>
-      <h2>Research Highlights</h2>
-      <p class="section-sub">Click a card to read a 2‑line summary</p>
-      <div class="grid">
-        <article class="project">
-          <h3>Separable Treatment Effects for Bivariate Responses</h3>
-          <p>Likelihood‑based estimation and hypothesis testing; discrete‑time ratio‑GOR design; extensions to continuous time.</p>
-        </article>
-        <article class="project">
-          <h3>Robust Classification under Label Noise</h3>
-          <p>Classification‑calibrated losses with noise‑robustness; provable risk bounds; practical algorithms with strong performance.</p>
-        </article>
-        <article class="project">
-          <h3>Survival with Repeated Measures & Frailty</h3>
-          <p>Kernel‑smoothed ratio estimators; bias correction under measurement error; asymptotics and efficient computation.</p>
-        </article>
+      <h2>News</h2>
+      <p class="section-sub">最新动态（悬停可暂停滚动）</p>
+      <div class="ticker card panel">
+        <ul class="ticker__list">
+          <li>2025-11-02 — Submitted <i>Statistics in Medicine</i> revision on mitigating input noise.</li>
+          <li>2025-10-14 — Preprint: Separable Treatment Effects for Bivariate Responses (arXiv pending).</li>
+          <li>2025-09-05 — Talk: Robust classification under label noise (Dept. Seminar).</li>
+          <li>2025-07-21 — Awarded travel grant for CJS meeting; presented kernel-smoothed estimator work.</li>
+          <li>2025-05-08 — Paper revision planned for label-noise-robust classification.</li>
+        </ul>
       </div>
     </section>
 
@@ -263,6 +266,9 @@
     if(saved==='light') root.classList.add('light');
     btn.addEventListener('click',()=>{root.classList.toggle('light');localStorage.setItem('color-mode',root.classList.contains('light')?'light':'dark')});
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Duplicate ticker list for seamless loop
+    const tl=document.querySelector('.ticker__list'); if(tl){ tl.innerHTML += tl.innerHTML; }
   </script>
   <!-- Optional Analytics (replace with your own) -->
   <!-- <script defer data-domain="pingbohu.com" src="https://plausible.io/js/script.js"></script> -->
