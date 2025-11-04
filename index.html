@@ -17,23 +17,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#0b1020; --fg:#e9ecf1; --muted:#a5afc0; --card:#121937cc; --line:#222a45; --brand1:#7c9eff; --brand2:#7af1d2; --accent:#ffd166;
-      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      /* —— Light theme as default —— */
+      --bg:#f8fafc; --fg:#0c1322; --muted:#475569; --card:#ffffff; --line:#e5e7eb;
+      --brand1:#335cff; --brand2:#06b6d4; --accent:#ca8a04;
+      --shadow: 0 12px 35px rgba(2,6,23,.08);
     }
+    /* Dark theme (toggle) */
+    .dark{--bg:#0b1020; --fg:#e9ecf1; --muted:#a5afc0; --card:#121937cc; --line:#222a45; --brand1:#7c9eff; --brand2:#7af1d2; --accent:#ffd166; --shadow: 0 10px 30px rgba(0,0,0,.25)}
+
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;}
-    a{color:var(--brand2);text-decoration:none}
+    a{color:var(--brand1);text-decoration:none}
     a:hover{opacity:.9}
     .container{max-width:1080px;margin:0 auto;padding:24px}
-    header{position:sticky;top:0;backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(180deg,rgba(11,16,32,.9),rgba(11,16,32,.6));z-index:10;border-bottom:1px solid var(--line)}
+    header{position:sticky;top:0;backdrop-filter:saturate(140%) blur(10px);background:rgba(255,255,255,.75);border-bottom:1px solid var(--line);z-index:10}
+    .dark header{background:linear-gradient(180deg,rgba(11,16,32,.9),rgba(11,16,32,.6))}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .nav .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
     .nav a.link{color:var(--muted);font-weight:600}
     .nav a.link:hover{color:var(--fg)}
     .nav .links{display:flex;gap:18px;flex-wrap:wrap}
 
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;padding:56px 0}
-    .card{background:linear-gradient(180deg,rgba(18,25,55,.7),rgba(18,25,55,.4));border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+    .hero{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;padding:56px 0}
+    /* subtle fancy glow */
+    .hero::before{content:"";position:absolute;inset:-40px -20px auto -20px;height:260px;background:
+      radial-gradient(1200px 180px at 20% 0%, rgba(51,92,255,.12), transparent 60%),
+      radial-gradient(900px 160px at 80% 0%, rgba(6,182,212,.10), transparent 60%);pointer-events:none}
+
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
     .hero .profile{padding:28px}
     .avatar{width:128px;height:128px;border-radius:18px;border:1px solid var(--line);object-fit:cover;display:block;margin-bottom:12px}
     h1{font-size:2.2rem;margin:8px 0 6px;line-height:1.15}
@@ -42,8 +53,9 @@
     .liberty{font-size:1.05rem; margin:0 .45rem; vertical-align:-1px}
 
     .links-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .linkbtn{display:inline-flex;align-items:center;gap:8px;padding:.55rem .8rem;border:1px solid var(--line);border-radius:12px;background:#151c37;color:var(--fg);font-weight:700}
+    .linkbtn{display:inline-flex;align-items:center;gap:8px;padding:.6rem .9rem;border:1px solid var(--line);border-radius:12px;background:#f1f5f9;color:var(--fg);font-weight:700}
     .linkbtn:hover{transform:translateY(-1px)}
+    .linkbtn.primary{background:linear-gradient(135deg,var(--brand1),var(--brand2)); color:white; border-color:transparent}
     .icon{width:18px;height:18px;display:inline-block}
 
     .panel{padding:22px}
@@ -53,31 +65,32 @@
 
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     .grid.two{grid-template-columns:repeat(2,1fr)}
-    .project{padding:16px;border:1px solid var(--line);border-radius:14px}
+    .grid.one{grid-template-columns:1fr}
+    .project{padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
     .project h3{margin:2px 0 6px;font-size:1.05rem}
     .project p{margin:0;color:var(--muted)}
 
-    .pub{padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
-    .pub .title{font-weight:700}
+    .pub{padding:16px;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;background:var(--card)}
+    .pub .title{font-weight:800}
     .pub .meta{color:var(--muted);font-size:.95rem;margin:6px 0}
-    .tag{font-size:.8rem;background:#18204a;border:1px solid var(--line);padding:.25rem .55rem;border-radius:999px;color:var(--muted)}
+    .pub .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
 
     /* Fancy timeline */
     .timeline{position:relative;padding-left:22px}
     .timeline::before{content:"";position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(var(--brand2),transparent)}
     .t-item{position:relative;margin:14px 0;padding-left:6px}
-    .t-item::before{content:"";position:absolute;left:-6px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--brand1);box-shadow:0 0 0 3px #0b1020}
+    .t-item::before{content:"";position:absolute;left:-6px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--brand1);box-shadow:0 0 0 3px var(--bg)}
     .t-title{font-weight:700}
     .t-sub{color:var(--muted)}
+    .chip{padding:.35rem .7rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.85rem}
 
     /* News: manual scroll */
-    .ticker{max-height:220px; overflow:auto; border:1px solid var(--line); border-radius:14px}
+    .ticker{max-height:240px; overflow:auto; border:1px solid var(--line); border-radius:14px; background:var(--card)}
     .ticker__list{list-style:none;margin:0;padding:12px;display:flex;flex-direction:column;gap:10px}
 
     footer{padding:32px 0;color:var(--muted);border-top:1px solid var(--line);text-align:center}
 
     .switch{margin-left:8px;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:6px 10px;color:var(--muted)}
-    .light{--bg:#f8fafc;--fg:#0c1322;--muted:#475569;--card:#ffffffcc;--line:#e2e8f0;--brand1:#335cff;--brand2:#22d3ee;--accent:#ca8a04}
 
     @media (max-width: 900px){
       .hero{grid-template-columns:1fr}
@@ -111,7 +124,6 @@
         <a class="link" href="#news">News</a>
         <a class="link" href="#pubs">Publications</a>
         <a class="link" href="#teaching">Teaching</a>
-        <a class="link" href="#service">Service</a>
         <a class="link" href="#contact">Contact</a>
         <button id="mode" class="switch" aria-label="切换明/暗色">☾/☀︎</button>
       </nav>
@@ -130,7 +142,7 @@
         <p class="meta">E-mail: <a href="mailto:ph2745@cumc.columbia.edu">ph2745@cumc.columbia.edu</a> / <a href="mailto:pingbo.hu@gmail.com">pingbo.hu@gmail.com</a></p>
 
         <div class="links-row">
-          <a class="linkbtn" href="/cv/PingboHu_CV.pdf" target="_blank" rel="noopener">
+          <a class="linkbtn primary" href="/cv/PingboHu_CV.pdf" target="_blank" rel="noopener">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1v5h5" opacity=".6"/><path fill="currentColor" d="M7 13h10v2H7zm0 4h10v2H7zM7 9h6v2H7z"/></svg>
             CV
           </a>
@@ -178,9 +190,9 @@
       <h2>News</h2>
       <div class="ticker card panel">
         <ul class="ticker__list">
-          <li>Mar 2025 — Our paper “Addressing Label Noise in Causation Classification via Kernel Embeddings” is accepted by <i>Statistica Sinica</i>.</li>     
+          <li>Mar 2025 — Our paper “Addressing Label Noise in Causation Classification via Kernel Embeddings” is accepted by <i>Statistica Sinica</i>.</li>
           <li>Apr 2024 — Our paper “Characterizing the COVID-19 dynamics with a new epidemic model: Susceptible-exposed-asymptomatic-symptomatic-active-removed,” published in <i>The Canadian Journal of Statistics</i>, is recognized among the journal’s Top 10 most-cited papers.</li>
-          <li>Mar 2024 — Our paper “Characterizing the COVID-19 dynamics with a new epidemic model: Susceptible-exposed-asymptomatic-symptomatic-active-removed,” published in <i>The Canadian Journal of Statistics</i>, is recognized as a Top Downloaded Article in <i>The Canadian Journal of Statistics</i>.</li>
+          <li>Mar 2024 — Our paper “Characterizing the COVID-19 dynamics with a new epidemic model: Susceptible-exposed-asymptomatic-symptomatic-active-removed,” published in <i>The Canadian Journal of Statistics</i>, is recognized as a Top Downloaded Article.</li>
           <li>Jun 2022 — Receive the Junior Researcher Award from the International Chinese Statistical Association (ICSA).</li>
           <li>Jan 2022 — Our paper “Characterizing the COVID-19 dynamics with a new epidemic model: Susceptible-exposed-asymptomatic-symptomatic-active-removed” is accepted by <i>The Canadian Journal of Statistics</i>.</li>
         </ul>
@@ -190,48 +202,43 @@
     <!-- PUBLICATIONS -->
     <section id="pubs">
       <h2>Selected Publications</h2>
-      <p class="section-sub">* Authors with † indicate equal contribution. Add/replace items in HTML as needed.</p>
-
       <div class="pub">
-        <div class="title">Mitigating Input Noise in Binary Classification with Data Augmentation</div>
-        <div class="meta"><i>Canadian Journal of Statistics</i>, 2025</div>
-        <div class="actions"><a class="linkbtn" href="#">PDF</a><a class="linkbtn" href="#">Code</a><a class="linkbtn" href="#">Talk</a></div>
+        <div class="title">Causal Learning of Paired Vectors with Label Noise: Impacts of Mislabeling and Correction Methods</div>
+        <div class="meta">Pingbo Hu, Grace Y. Yi — <i>Statistica Sinica</i>, In press, 2025</div>
+        <div class="actions">
+          <a class="linkbtn" href="https://www3.stat.sinica.edu.tw/ss_newpaper/SS-2023-0202_na.pdf" target="_blank" rel="noopener">DOI</a>
+        </div>
       </div>
 
       <div class="pub">
-        <div class="title">Separable Treatment Effects for Bivariate Responses</div>
-        <div class="meta">preprint, 2025</div>
-        <div class="actions"><a class="linkbtn" href="#">Preprint</a><a class="linkbtn" href="#">Slides</a></div>
-      </div>
-
-      <div class="pub">
-        <div class="title">Kernel-Smoothed Estimation under Measurement Error</div>
-        <div class="meta">in prep., 2025</div>
-        <div class="actions"><a class="linkbtn" href="#">Draft</a></div>
+        <div class="title">Characterizing the COVID-19 dynamics with a new epidemic model: Susceptible-exposed-asymptomatic-symptomatic-active-removed</div>
+        <div class="meta">Grace Y. Yi, Pingbo Hu, Wenqing He — <i>The Canadian Journal of Statistics</i>, 2022</div>
+        <div class="actions">
+          <a class="linkbtn" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/cjs.11698" target="_blank" rel="noopener">DOI</a>
+        </div>
       </div>
     </section>
 
     <!-- TEACHING -->
     <section id="teaching">
       <h2>Teaching</h2>
-      <div class="grid two">
+      <div class="grid one">
         <div class="project">
-          <h3>Intro to Probability & Statistics</h3>
-          <p>TA/Instructor support; designed labs on CLT, bootstrap, logistic regression.</p>
+          <h3>Mathematical Statistics</h3>
+          <p>Lecturing tutorial, University of Western Ontario, Canada — Jan–Apr 2023; Jan–Apr 2024</p>
         </div>
         <div class="project">
-          <h3>Statistical Learning</h3>
-          <p>Practical modules on loss functions, cross-validation, and calibration.</p>
+          <h3>Intermediate Probability</h3>
+          <p>Lecturing tutorial, University of Western Ontario, Canada — Sep–Dec 2023</p>
         </div>
-      </div>
-    </section>
-
-    <!-- SERVICE & AWARDS -->
-    <section id="service">
-      <h2>Service & Awards</h2>
-      <div class="grid two">
-        <div class="project"><h3>Reviewer</h3><p><span class="tag">SIM</span> <span class="tag">CJS</span></p></div>
-        <div class="project"><h3>Awards</h3><p>Best Student Paper, Travel Grants, TA Excellence (examples)</p></div>
+        <div class="project">
+          <h3>Calculus</h3>
+          <p>Lecturing tutorial, Sichuan University, China — Sep 2018–Dec 2019</p>
+        </div>
+        <div class="project">
+          <h3>Probability Theory and Mathematical Statistics</h3>
+          <p>Lecturing tutorial, Sichuan University, China — Mar–Jul 2018</p>
+        </div>
       </div>
     </section>
 
@@ -239,24 +246,13 @@
     <section id="contact">
       <h2>Contact</h2>
       <div class="card panel">
-        <p>Preferred: <a href="mailto:ph2745@cumc.columbia.edu">ph2745@cumc.columbia.edu</a></p>
+        <p><b>Email:</b> <a href="mailto:ph2745@cumc.columbia.edu">ph2745@cumc.columbia.edu</a> / <a href="mailto:pingbo.hu@gmail.com">pingbo.hu@gmail.com</a></p>
+        <p><b>Office:</b> R606, 722 West 168th Street, New York City, NY, USA, 10032</p>
         <p>Links:
-          <a class="linkbtn" href="/cv/PingboHu_CV.pdf" target="_blank" rel="noopener">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1v5h5" opacity=".6"/><path fill="currentColor" d="M7 13h10v2H7zm0 4h10v2H7zM7 9h6v2H7z"/></svg>
-            CV
-          </a>
-          <a class="linkbtn" href="https://scholar.google.com/citations?user=FW43ILkAAAAJ&hl=zh-CN&oi=ao" target="_blank" rel="noopener">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3l8 6-8 6-8-6 8-6zm0 9l8 6H4l8-6z"/></svg>
-            Google Scholar
-          </a>
-          <a class="linkbtn" href="https://www.linkedin.com/in/pingbo-hu-6a7827193/" target="_blank" rel="noopener">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.9 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.1c.7-1.2 2.3-2.4 4.7-2.4 5 0 5.9 3.3 5.9 7.6V24H18V16c0-1.9 0-4.4-2.7-4.4-2.7 0-3.1 2.1-3.1 4.2V24H7.5V8z"/></svg>
-            LinkedIn
-          </a>
-          <a class="linkbtn" href="https://github.com/pingbohu43" target="_blank" rel="noopener">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.5-1.8-1.5-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.3 2 1.3 1.2 2 3.2 1.5 4 .9.1-.9.5-1.5.9-1.8-2.7-.3-5.6-1.4-5.6-6.1 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C18.9 6.8 20 7.1 20 7.1c.6 1.6.2 2.8.1 3.1.8.9 1.2 2 1.2 3.3 0 4.7-2.9 5.8-5.6 6.1.5.4 1 1.2 1 2.5v3.7c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
-            GitHub
-          </a>
+          <a class="linkbtn" href="/cv/PingboHu_CV.pdf" target="_blank" rel="noopener">CV</a>
+          <a class="linkbtn" href="https://scholar.google.com/citations?user=FW43ILkAAAAJ&hl=zh-CN&oi=ao" target="_blank" rel="noopener">Google Scholar</a>
+          <a class="linkbtn" href="https://www.linkedin.com/in/pingbo-hu-6a7827193/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="linkbtn" href="https://github.com/pingbohu43" target="_blank" rel="noopener">GitHub</a>
         </p>
       </div>
     </section>
@@ -267,10 +263,14 @@
   </footer>
 
   <script>
-    // Dark/Light mode toggle with localStorage
+    // Theme toggle: default light, toggle to dark
     const root = document.documentElement; const btn = document.getElementById('mode');
-    if(localStorage.getItem('color-mode')==='light') root.classList.add('light');
-    btn.addEventListener('click',()=>{root.classList.toggle('light');localStorage.setItem('color-mode',root.classList.contains('light')?'light':'dark')});
+    const saved = localStorage.getItem('color-mode');
+    if(saved==='dark') root.classList.add('dark');
+    btn.addEventListener('click',()=>{
+      root.classList.toggle('dark');
+      localStorage.setItem('color-mode', root.classList.contains('dark') ? 'dark' : 'light');
+    });
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
