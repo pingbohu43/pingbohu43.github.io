@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pingbohu43.github.io/sitemap.xml
